@@ -1,0 +1,1669 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Winding journey down (in Gibbs energy)},
+            pdfauthor={Jeffrey M. Dick},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Winding journey down (in Gibbs energy)}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Jeffrey M. Dick}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2018-04-18}
+
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(CHNOSZ)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## CHNOSZ version 1.1.3 (2017-11-13)
+\end{verbatim}
+
+\begin{verbatim}
+## Please run data(thermo) to create the "thermo" object
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(thermo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data(thermo): attached environment "CHNOSZ"
+\end{verbatim}
+
+\begin{verbatim}
+## thermo$obigt: 1911 aqueous, 3588 total species
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## thermo$obigt: 1911 aqueous, 3588 total species}
+\KeywordTok{mod.obigt}\NormalTok{(}\StringTok{"[Met]"}\NormalTok{, }\DataTypeTok{G=}\OperatorTok{-}\DecValTok{35245}\NormalTok{, }\DataTypeTok{H=}\OperatorTok{-}\DecValTok{59310}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## mod.obigt: updated [Met](aq)
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 1867
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## mod.obigt: updated [Met](aq)}
+\NormalTok{## [1] 1867}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bison.T <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{93.3}\NormalTok{, }\FloatTok{79.4}\NormalTok{, }\FloatTok{67.5}\NormalTok{, }\FloatTok{65.3}\NormalTok{, }\FloatTok{57.1}\NormalTok{)}
+\NormalTok{bison.pH <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{7.350}\NormalTok{, }\FloatTok{7.678}\NormalTok{, }\FloatTok{7.933}\NormalTok{, }\FloatTok{7.995}\NormalTok{, }\FloatTok{8.257}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{distance <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{22}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{xpoints <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DataTypeTok{length.out=}\DecValTok{128}\NormalTok{)}
+\CommentTok{# T plot}
+\KeywordTok{plot}\NormalTok{(distance, bison.T, }\DataTypeTok{xlab=}\StringTok{"distance, m"}\NormalTok{, }\DataTypeTok{ylab=}\KeywordTok{axis.label}\NormalTok{(}\StringTok{"T"}\NormalTok{))}
+\NormalTok{Tfun <-}\StringTok{ }\KeywordTok{splinefun}\NormalTok{(distance, bison.T, }\DataTypeTok{method=}\StringTok{"mono"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(xpoints, }\KeywordTok{Tfun}\NormalTok{(xpoints))}
+
+\CommentTok{# pH plot}
+\KeywordTok{plot}\NormalTok{(distance, bison.pH, }\DataTypeTok{xlab=}\StringTok{"distance, m"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"pH"}\NormalTok{)}
+\NormalTok{pHfun <-}\StringTok{ }\KeywordTok{splinefun}\NormalTok{(distance, bison.pH, }\DataTypeTok{method=}\StringTok{"mono"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(xpoints, }\KeywordTok{pHfun}\NormalTok{(xpoints))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# read the amino acid compositions}
+\NormalTok{aa.annot <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata/protein/DS11.csv"}\NormalTok{, }\DataTypeTok{package=}\StringTok{"CHNOSZ"}\NormalTok{), }\DataTypeTok{as.is=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{aa.phyla <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata/protein/DS13.csv"}\NormalTok{, }\DataTypeTok{package=}\StringTok{"CHNOSZ"}\NormalTok{), }\DataTypeTok{as.is=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sites <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"S"}\NormalTok{, }\StringTok{"R"}\NormalTok{, }\StringTok{"Q"}\NormalTok{, }\StringTok{"P"}\NormalTok{)}
+\NormalTok{sitenames <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\StringTok{"bison"}\NormalTok{, sites, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classes <-}\StringTok{ }\KeywordTok{unique}\NormalTok{(aa.annot}\OperatorTok{$}\NormalTok{protein)}
+\NormalTok{classes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "overall"        "transferase"    "transport"      "dehydrogenase" 
+##  [5] "synthase"       "ATPase"         "kinase"         "synthetase"    
+##  [9] "membrane"       "permease"       "hydrolase"      "oxidoreductase"
+## [13] "transcription"  "peptidase"      "ribosomal"      "protease"      
+## [17] " reductase"     "transposase"    "periplasmic"    "signal"        
+## [21] "phosphatase"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# the names of the phyla in alphabetical order (except Deinococcus-Thermus at end)}
+\NormalTok{phyla.abc <-}\StringTok{ }\KeywordTok{sort}\NormalTok{(}\KeywordTok{unique}\NormalTok{(aa.phyla}\OperatorTok{$}\NormalTok{organism))[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{,}\DecValTok{9}\OperatorTok{:}\DecValTok{11}\NormalTok{,}\DecValTok{8}\NormalTok{)]}
+\CommentTok{# an abbreviation for Dein.-Thermus}
+\NormalTok{phyla.abbrv <-}\StringTok{ }\NormalTok{phyla.abc}
+\NormalTok{phyla.abbrv[[}\DecValTok{11}\NormalTok{]] <-}\StringTok{ "Dein.-Thermus"}
+\NormalTok{phyla.cols <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#f48ba5"}\NormalTok{, }\StringTok{"#f2692f"}\NormalTok{, }\StringTok{"#cfdd2a"}\NormalTok{,}
+\StringTok{"#962272"}\NormalTok{, }\StringTok{"#87c540"}\NormalTok{, }\StringTok{"#66c3a2"}\NormalTok{, }\StringTok{"#12a64a"}\NormalTok{, }\StringTok{"#f58656"}\NormalTok{,}
+\StringTok{"#ee3237"}\NormalTok{, }\StringTok{"#25b7d5"}\NormalTok{, }\StringTok{"#3953a4"}\NormalTok{)}
+\NormalTok{phyla.lty <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+\NormalTok{phyla.abbrv}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Acidobacteria"  "Aquificae"      "Bacteroidetes"  "Chlorobi"      
+##  [5] "Chloroflexi"    "Crenarchaeota"  "Cyanobacteria"  "Euryarchaeota" 
+##  [9] "Firmicutes"     "Proteobacteria" "Dein.-Thermus"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 2011 plot}
+\NormalTok{ylab <-}\StringTok{ }\KeywordTok{expression}\NormalTok{(}\KeywordTok{bar}\NormalTok{(}\KeywordTok{italic}\NormalTok{(Z))[C])}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.5}\NormalTok{, }\DecValTok{5}\NormalTok{), }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.27}\NormalTok{, }\OperatorTok{-}\FloatTok{0.11}\NormalTok{), }\DataTypeTok{xlab=}\StringTok{"location"}\NormalTok{, }\DataTypeTok{xaxt=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{ylab=}\NormalTok{ylab)}
+\KeywordTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{at=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+\NormalTok{col <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"green"}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\DecValTok{20}\NormalTok{))}
+\NormalTok{lwd <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{))}
+\NormalTok{clab <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"hydrolase"}\NormalTok{, }\StringTok{"overall"}\NormalTok{, }\StringTok{"protease"}\NormalTok{, }\StringTok{"oxidoreductase"}\NormalTok{, }\StringTok{"transport"}\NormalTok{, }\StringTok{"membrane"}\NormalTok{, }\StringTok{"permease"}\NormalTok{)}
+\NormalTok{pf.annot <-}\StringTok{ }\KeywordTok{protein.formula}\NormalTok{(aa.annot)}
+\NormalTok{ZC.annot <-}\StringTok{ }\KeywordTok{ZC}\NormalTok{(pf.annot)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(classes)) \{}
+\KeywordTok{lines}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, ZC.annot[(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}\OperatorTok{+}\DecValTok{5}\OperatorTok{*}\NormalTok{(i}\OperatorTok{-}\DecValTok{1}\NormalTok{)], }\DataTypeTok{col=}\NormalTok{col[i], }\DataTypeTok{lwd=}\NormalTok{lwd[i])}
+\ControlFlowTok{if}\NormalTok{(classes[i] }\OperatorTok{%in%}\StringTok{ }\NormalTok{clab) }\KeywordTok{text}\NormalTok{(}\FloatTok{0.8}\NormalTok{, ZC.annot[}\DecValTok{1}\OperatorTok{+}\DecValTok{5}\OperatorTok{*}\NormalTok{(i}\OperatorTok{-}\DecValTok{1}\NormalTok{)], classes[i], }\DataTypeTok{adj=}\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\StringTok{"annotations"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 2013 plot}
+\NormalTok{pf.phyla <-}\StringTok{ }\KeywordTok{protein.formula}\NormalTok{(aa.phyla)}
+\NormalTok{ZC.phyla <-}\StringTok{ }\KeywordTok{ZC}\NormalTok{(pf.phyla)}
+\CommentTok{# set up plot}
+\KeywordTok{plot}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{), }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.27}\NormalTok{, }\OperatorTok{-}\FloatTok{0.11}\NormalTok{), }\DataTypeTok{xlab=}\StringTok{"location"}\NormalTok{, }\DataTypeTok{ylab=}\NormalTok{ylab)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(phyla.abc)) \{}
+\CommentTok{# which of the model proteins correspond to this phylum}
+\NormalTok{iphy <-}\StringTok{ }\KeywordTok{which}\NormalTok{(aa.phyla}\OperatorTok{$}\NormalTok{organism}\OperatorTok{==}\NormalTok{phyla.abc[i])}
+\CommentTok{# the locations (of 1, 2, 3, 4, 5) where this phylum is found}
+\NormalTok{ilocs <-}\StringTok{ }\KeywordTok{match}\NormalTok{(aa.phyla}\OperatorTok{$}\NormalTok{protein[iphy], sitenames)}
+\CommentTok{# the plotting symbol: determined by alphabetical position of the phylum}
+\KeywordTok{points}\NormalTok{(ilocs, ZC.phyla[iphy], }\DataTypeTok{pch=}\NormalTok{i}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.2}\NormalTok{)}
+\CommentTok{# a line to connect same phyla occurring at adjacent sites}
+\NormalTok{inlocs <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{inlocs[ilocs] <-}\StringTok{ }\NormalTok{ilocs}
+\KeywordTok{lines}\NormalTok{(inlocs, ZC.phyla[iphy][}\KeywordTok{match}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, ilocs)])}
+\NormalTok{\}}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DataTypeTok{legend=}\NormalTok{phyla.abbrv, }\DataTypeTok{bg=}\StringTok{"white"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.9}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\StringTok{"major phyla"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{setup.basis <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+\KeywordTok{basis}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"HCO3-"}\NormalTok{, }\StringTok{"H2O"}\NormalTok{, }\StringTok{"NH3"}\NormalTok{, }\StringTok{"HS-"}\NormalTok{, }\StringTok{"H2"}\NormalTok{, }\StringTok{"H+"}\NormalTok{))}
+\KeywordTok{basis}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"HCO3-"}\NormalTok{, }\StringTok{"NH3"}\NormalTok{, }\StringTok{"HS-"}\NormalTok{, }\StringTok{"H+"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{3}\NormalTok{, }\OperatorTok{-}\DecValTok{4}\NormalTok{, }\OperatorTok{-}\DecValTok{7}\NormalTok{, }\OperatorTok{-}\FloatTok{7.933}\NormalTok{))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setup.basis}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       C H N O S  Z ispecies logact state
+## HCO3- 1 1 0 3 0 -1       13 -3.000    aq
+## H2O   0 2 0 1 0  0        1  0.000   liq
+## NH3   0 3 1 0 0  0       66 -4.000    aq
+## HS-   0 1 0 0 1 -1       22 -7.000    aq
+## H2    0 2 0 0 0  0       64  0.000    aq
+## H+    0 1 0 0 0  1        3 -7.933    aq
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ip.annot <-}\StringTok{ }\KeywordTok{add.protein}\NormalTok{(aa.annot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## add.protein: added 105 new protein(s) to thermo$protein
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{species}\NormalTok{(}\StringTok{"overall"}\NormalTok{, sitenames)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      HCO3-       H2O     NH3   HS-       H2       H+ ispecies logact state
+## 1 1020.547 -2772.768 270.298 5.694 2147.462 1026.241     3589     -3    aq
+## 2  935.793 -2541.750 251.890 5.381 1963.205  941.174     3590     -3    aq
+## 3  981.834 -2666.209 271.402 5.362 2047.264  987.196     3591     -3    aq
+## 4  952.439 -2583.005 266.317 5.834 1978.491  958.273     3592     -3    aq
+## 5  941.696 -2554.431 263.075 5.750 1957.024  947.446     3593     -3    aq
+##             name
+## 1 overall_bisonN
+## 2 overall_bisonS
+## 3 overall_bisonR
+## 4 overall_bisonQ
+## 5 overall_bisonP
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pl <-}\StringTok{ }\KeywordTok{protein.length}\NormalTok{(ip.annot[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{])}
+\NormalTok{mysp <-}\StringTok{ }\KeywordTok{species}\NormalTok{()}
+\NormalTok{mysp[, }\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{]}\OperatorTok{/}\NormalTok{pl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      HCO3-       H2O      NH3        HS-       H2       H+
+## 1 5.125029 -13.92441 1.357395 0.02859439 10.78422 5.153623
+## 2 5.076258 -13.78786 1.366391 0.02918952 10.64951 5.105448
+## 3 5.022554 -13.63894 1.388352 0.02742921 10.47274 5.049983
+## 4 4.965715 -13.46697 1.388492 0.03041663 10.31522 4.996131
+## 5 4.971970 -13.48689 1.388984 0.03035887 10.33270 5.002328
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{get.logaH2 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(T) }\OperatorTok{-}\DecValTok{11} \OperatorTok{+}\StringTok{ }\NormalTok{T }\OperatorTok{*}\StringTok{ }\DecValTok{3}\OperatorTok{/}\DecValTok{40}
+\KeywordTok{species}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      HCO3-       H2O     NH3   HS-       H2       H+ ispecies logact state
+## 1 1020.547 -2772.768 270.298 5.694 2147.462 1026.241     3589      0    aq
+## 2  935.793 -2541.750 251.890 5.381 1963.205  941.174     3590      0    aq
+## 3  981.834 -2666.209 271.402 5.362 2047.264  987.196     3591      0    aq
+## 4  952.439 -2583.005 266.317 5.834 1978.491  958.273     3592      0    aq
+## 5  941.696 -2554.431 263.075 5.750 1957.024  947.446     3593      0    aq
+##             name
+## 1 overall_bisonN
+## 2 overall_bisonS
+## 3 overall_bisonR
+## 4 overall_bisonQ
+## 5 overall_bisonP
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{T=}\NormalTok{bison.T, }\DataTypeTok{pH=}\NormalTok{bison.pH, }\DataTypeTok{H2=}\KeywordTok{get.logaH2}\NormalTok{(bison.T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 5 values from 330.25 to 366.45 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is pH at 5 values from 7.35 to 8.257
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 3 is log_a(H2) at 5 values from -6.7175 to -4.0025
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 11 species at 5 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 5 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a.res <-}\StringTok{ }\KeywordTok{t}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(a}\OperatorTok{$}\NormalTok{values))}\OperatorTok{/}\NormalTok{pl}
+\NormalTok{a.res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]      [,2]      [,3]      [,4]      [,5]
+## X3589 -18.71303 -27.89120 -35.38558 -36.82273 -42.26577
+## X3590 -18.83798 -27.91021 -35.31815 -36.73891 -42.12027
+## X3591 -19.11293 -28.05059 -35.34886 -36.74887 -42.05229
+## X3592 -19.26206 -28.07740 -35.27587 -36.65697 -41.88924
+## X3593 -19.24555 -28.07438 -35.28385 -36.66702 -41.90709
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(a.res, }\DecValTok{2}\NormalTok{, which.max)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 1 4 4 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a.res <-}\StringTok{ }\NormalTok{a.res }\OperatorTok{-}\StringTok{ }\KeywordTok{log10}\NormalTok{(pl)}
+\KeywordTok{apply}\NormalTok{(a.res, }\DecValTok{2}\NormalTok{, which.max)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 4 4 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Tlim <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\CommentTok{# first plot}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{T=}\NormalTok{Tlim, }\DataTypeTok{H2=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{, }\OperatorTok{-}\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 11 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{diagram}\NormalTok{(a, }\DataTypeTok{fill=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{names=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{normalize=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lines}\NormalTok{(Tlim, }\KeywordTok{get.logaH2}\NormalTok{(Tlim), }\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\CommentTok{# second plot}
+\KeywordTok{species}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\OperatorTok{-}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      HCO3-       H2O     NH3   HS-       H2       H+ ispecies logact state
+## 1 1020.547 -2772.768 270.298 5.694 2147.462 1026.241     3589     -3    aq
+## 2  935.793 -2541.750 251.890 5.381 1963.205  941.174     3590     -3    aq
+## 3  981.834 -2666.209 271.402 5.362 2047.264  987.196     3591     -3    aq
+## 4  952.439 -2583.005 266.317 5.834 1978.491  958.273     3592     -3    aq
+## 5  941.696 -2554.431 263.075 5.750 1957.024  947.446     3593     -3    aq
+##             name
+## 1 overall_bisonN
+## 2 overall_bisonS
+## 3 overall_bisonR
+## 4 overall_bisonQ
+## 5 overall_bisonP
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xT <-}\StringTok{ }\KeywordTok{Tfun}\NormalTok{(xpoints)}
+\NormalTok{xpH <-}\StringTok{ }\KeywordTok{pHfun}\NormalTok{(xpoints)}
+\NormalTok{xH2 <-}\StringTok{ }\KeywordTok{get.logaH2}\NormalTok{(xT)}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{T=}\NormalTok{xT, }\DataTypeTok{pH=}\NormalTok{xpH, }\DataTypeTok{H2=}\NormalTok{xH2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 330.25 to 366.45 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is pH at 128 values from 7.35 to 8.257
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 3 is log_a(H2) at 128 values from -6.7175 to -4.0025
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 11 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OperatorTok{$}\NormalTok{vars[}\DecValTok{1}\NormalTok{] <-}\StringTok{ "distance, m"}
+\NormalTok{a}\OperatorTok{$}\NormalTok{vals[[}\DecValTok{1}\NormalTok{]] <-}\StringTok{ }\NormalTok{xpoints}
+\NormalTok{e <-}\StringTok{ }\KeywordTok{equilibrate}\NormalTok{(a, }\DataTypeTok{normalize=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 199.13 184.347 195.485 191.803 189.401
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is -0.0176536766982609
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{diagram}\NormalTok{(e, }\DataTypeTok{legend.x=}\OtherTok{NULL}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"bottom"}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{legend=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{loadclass <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(class) \{}
+\KeywordTok{species}\NormalTok{(}\DataTypeTok{delete=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{species}\NormalTok{(}\KeywordTok{rep}\NormalTok{(class, }\DataTypeTok{each=}\DecValTok{5}\NormalTok{), }\KeywordTok{rep}\NormalTok{(sitenames, }\KeywordTok{length}\NormalTok{(class)))}
+\NormalTok{\}}
+\NormalTok{xclasses <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"overall"}\NormalTok{, }\StringTok{"transferase"}\NormalTok{, }\StringTok{"transport"}\NormalTok{, }\StringTok{"synthetase"}\NormalTok{, }\StringTok{"membrane"}\NormalTok{, }\StringTok{"permease"}\NormalTok{)}
+\KeywordTok{loadclass}\NormalTok{(xclasses)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       HCO3-       H2O     NH3   HS-       H2       H+ ispecies logact
+## 1  1020.547 -2772.768 270.298 5.694 2147.462 1026.241     3589     -3
+## 2   935.793 -2541.750 251.890 5.381 1963.205  941.174     3590     -3
+## 3   981.834 -2666.209 271.402 5.362 2047.264  987.196     3591     -3
+## 4   952.439 -2583.005 266.317 5.834 1978.491  958.273     3592     -3
+## 5   941.696 -2554.431 263.075 5.750 1957.024  947.446     3593     -3
+## 6  1271.320 -3458.728 332.917 7.297 2680.908 1278.617     3594     -3
+## 7  1097.800 -2984.669 293.369 6.385 2307.480 1104.185     3595     -3
+## 8  1069.117 -2906.813 295.543 6.100 2233.131 1075.217     3596     -3
+## 9  1086.617 -2952.164 304.137 7.139 2259.981 1093.756     3597     -3
+## 10 1060.934 -2882.758 296.521 6.900 2207.702 1067.834     3598     -3
+## 11 1162.776 -3170.557 297.309 6.242 2475.434 1169.018     3599     -3
+## 12 1097.035 -2989.452 285.429 6.133 2330.736 1103.168     3600     -3
+## 13 1156.820 -3154.202 308.522 6.059 2447.404 1162.879     3601     -3
+## 14 1150.589 -3131.574 309.047 7.027 2425.233 1157.616     3602     -3
+## 15 1111.344 -3024.726 299.153 6.789 2341.956 1118.133     3603     -3
+## 16 1441.359 -3911.431 382.991 8.304 3020.088 1449.663     3604     -3
+## 17 1302.689 -3534.544 349.862 7.516 2723.669 1310.205     3605     -3
+## 18 1321.567 -3586.522 362.426 7.802 2750.619 1329.369     3606     -3
+## 19 1208.047 -3274.479 335.865 7.730 2505.188 1215.777     3607     -3
+## 20 1177.991 -3193.964 328.462 7.616 2442.256 1185.607     3608     -3
+## 21 1302.085 -3553.781 328.397 5.525 2774.459 1307.610     3609     -3
+## 22 1188.795 -3244.127 304.704 5.640 2528.831 1194.435     3610     -3
+## 23 1240.910 -3383.987 330.787 5.739 2617.920 1246.649     3611     -3
+## 24 1197.944 -3261.103 322.049 6.083 2517.816 1204.027     3612     -3
+## 25 1181.100 -3217.966 317.048 6.080 2486.185 1187.180     3613     -3
+## 26 1178.542 -3234.512 284.532 6.672 2549.373 1185.214     3614     -3
+## 27 1136.201 -3116.075 279.449 6.750 2450.669 1142.951     3615     -3
+## 28 1193.003 -3274.439 301.528 6.127 2563.921 1199.130     3616     -3
+## 29 1166.348 -3195.077 297.702 7.224 2497.280 1173.572     3617     -3
+## 30 1136.317 -3113.567 290.228 7.231 2434.531 1143.548     3618     -3
+##    state               name
+## 1     aq     overall_bisonN
+## 2     aq     overall_bisonS
+## 3     aq     overall_bisonR
+## 4     aq     overall_bisonQ
+## 5     aq     overall_bisonP
+## 6     aq transferase_bisonN
+## 7     aq transferase_bisonS
+## 8     aq transferase_bisonR
+## 9     aq transferase_bisonQ
+## 10    aq transferase_bisonP
+## 11    aq   transport_bisonN
+## 12    aq   transport_bisonS
+## 13    aq   transport_bisonR
+## 14    aq   transport_bisonQ
+## 15    aq   transport_bisonP
+## 16    aq  synthetase_bisonN
+## 17    aq  synthetase_bisonS
+## 18    aq  synthetase_bisonR
+## 19    aq  synthetase_bisonQ
+## 20    aq  synthetase_bisonP
+## 21    aq    membrane_bisonN
+## 22    aq    membrane_bisonS
+## 23    aq    membrane_bisonR
+## 24    aq    membrane_bisonQ
+## 25    aq    membrane_bisonP
+## 26    aq    permease_bisonN
+## 27    aq    permease_bisonS
+## 28    aq    permease_bisonR
+## 29    aq    permease_bisonQ
+## 30    aq    permease_bisonP
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{T=}\NormalTok{xT, }\DataTypeTok{pH=}\NormalTok{xpH, }\DataTypeTok{H2=}\NormalTok{xH2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 330.25 to 366.45 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is pH at 128 values from 7.35 to 8.257
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 3 is log_a(H2) at 128 values from -6.7175 to -4.0025
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 36 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OperatorTok{$}\NormalTok{vars[}\DecValTok{1}\NormalTok{] <-}\StringTok{ "distance, m"}
+\NormalTok{a}\OperatorTok{$}\NormalTok{vals[[}\DecValTok{1}\NormalTok{]] <-}\StringTok{ }\NormalTok{xpoints}
+\NormalTok{col <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{) \{}
+\NormalTok{ispecies <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{((}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}\OperatorTok{+}\NormalTok{(i}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{3}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) \{}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\OperatorTok{+}\NormalTok{(x}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{5}\NormalTok{\} )}
+\KeywordTok{names}\NormalTok{(ispecies) <-}\StringTok{ }\NormalTok{xclasses[(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}\OperatorTok{+}\NormalTok{(i}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\DecValTok{3}\NormalTok{]}
+\KeywordTok{strip}\NormalTok{(}\DataTypeTok{a =}\NormalTok{ a, }\DataTypeTok{ispecies =}\NormalTok{ ispecies, }\DataTypeTok{col =}\NormalTok{ col, }\DataTypeTok{xticks =}\NormalTok{ distance, }\DataTypeTok{cex.names =} \DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 199.13 184.347 195.485 191.803 189.401
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is -0.0176536766982609
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 246.802 215.664 212.678 218.348 212.768
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0.0438572095139632
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 228.112 217.548 230.214 231.561 223.405
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0.0534011619257556
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 278.511 253.651 259.441 240.969 234.61
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0.102838995245895
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 251.726 232.591 245.652 240.172 236.252
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0.0814888085736157
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 5 of 30 species
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 228.73 222.955 234.511 231.369 225.382
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0.0580260920390162
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'normalize' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\subsection{5 Comparing old and new methionine sidechain
+parameters}\label{comparing-old-and-new-methionine-sidechain-parameters}
+
+Make some T −log aH2 metastable equilibrium predominance diagrams using
+different values for the ther- modynamic properties of the methionine
+sidechain group {[}Met{]}. The ﬁrst row shows the results using the old
+values (deﬁned on page 1); for the second row (j=2), we reset the
+database to use the current (revised) parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{) \{}
+\CommentTok{# use old [Met] for first row and new [Met] for second row}
+\ControlFlowTok{if}\NormalTok{(j}\OperatorTok{==}\DecValTok{2}\NormalTok{) \{}
+\KeywordTok{data}\NormalTok{(thermo)}
+\NormalTok{ip.annot <-}\StringTok{ }\KeywordTok{add.protein}\NormalTok{(aa.annot)}
+\NormalTok{\}}
+\CommentTok{# setup basis species and proteins}
+\KeywordTok{setup.basis}\NormalTok{()}
+\CommentTok{# make the plots}
+\ControlFlowTok{for}\NormalTok{(annot }\ControlFlowTok{in} \KeywordTok{c}\NormalTok{(}\StringTok{"overall"}\NormalTok{, }\StringTok{"transferase"}\NormalTok{, }\StringTok{"synthase"}\NormalTok{)) \{}
+\NormalTok{ip <-}\StringTok{ }\NormalTok{ip.annot[aa.annot}\OperatorTok{$}\NormalTok{protein}\OperatorTok{==}\NormalTok{annot]}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{T=}\KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{), }\DataTypeTok{H2=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{, }\OperatorTok{-}\DecValTok{4}\NormalTok{), }\DataTypeTok{iprotein=}\NormalTok{ip)}
+\KeywordTok{diagram}\NormalTok{(a, }\DataTypeTok{fill=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{names=}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{normalize=}\OtherTok{TRUE}\NormalTok{)}
+\CommentTok{# add logaH2-T line}
+\KeywordTok{lines}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{], }\KeywordTok{get.logaH2}\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]), }\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\CommentTok{# add a title}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\NormalTok{annot)}
+\NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## thermo$obigt: 1911 aqueous, 3588 total species
+\end{verbatim}
+
+\begin{verbatim}
+## add.protein: added 105 new protein(s) to thermo$protein
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is T at 128 values from 323.15 to 373.15 K
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 2 is log_a(H2) at 128 values from -7 to -4
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: plotting A/(2.303RT) / n.balance (maximum affinity method for 2-D diagrams)
+\end{verbatim}
+
+\begin{verbatim}
+## diagram: using 'normalize' in calculation of predominant species
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 2 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 128 values of T and P (wet)
+\end{verbatim}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha.blast <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{out <-}\StringTok{ }\KeywordTok{xtabs}\NormalTok{(ref }\OperatorTok{~}\StringTok{ }\NormalTok{protein }\OperatorTok{+}\StringTok{ }\NormalTok{organism, aa.phyla)}
+\CommentTok{# put it in correct order, then turn counts into fractions}
+\NormalTok{out <-}\StringTok{ }\NormalTok{out[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\OperatorTok{:}\DecValTok{2}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{7}\NormalTok{,}\DecValTok{9}\OperatorTok{:}\DecValTok{11}\NormalTok{,}\DecValTok{8}\NormalTok{)]}
+\NormalTok{out <-}\StringTok{ }\NormalTok{out}\OperatorTok{/}\KeywordTok{rowSums}\NormalTok{(out)}
+\KeywordTok{return}\NormalTok{(out)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha.equil <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(}\DataTypeTok{i=}\DecValTok{1}\NormalTok{) \{}
+\CommentTok{# order the names and counts to go with the alphabetical phylum list}
+\NormalTok{iloc <-}\StringTok{ }\KeywordTok{which}\NormalTok{(aa.phyla}\OperatorTok{$}\NormalTok{protein}\OperatorTok{==}\NormalTok{sitenames[i])}
+\NormalTok{iloc <-}\StringTok{ }\NormalTok{iloc[}\KeywordTok{order}\NormalTok{(}\KeywordTok{match}\NormalTok{(aa.phyla}\OperatorTok{$}\NormalTok{organism[iloc], phyla.abc))]}
+\CommentTok{# set up basis species, with pH specific for this location}
+\KeywordTok{setup.basis}\NormalTok{()}
+\KeywordTok{basis}\NormalTok{(}\StringTok{"pH"}\NormalTok{, bison.pH[i])}
+\CommentTok{# calculate metastable equilibrium activities of the residues}
+\NormalTok{a <-}\StringTok{ }\KeywordTok{affinity}\NormalTok{(}\DataTypeTok{H2=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{11}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{101}\NormalTok{), }\DataTypeTok{T=}\NormalTok{bison.T[i], }\DataTypeTok{iprotein=}\NormalTok{ip.phyla[iloc])}
+\NormalTok{e <-}\StringTok{ }\KeywordTok{equilibrate}\NormalTok{(a, }\DataTypeTok{loga.balance=}\DecValTok{0}\NormalTok{, }\DataTypeTok{as.residue=}\OtherTok{TRUE}\NormalTok{)}
+\CommentTok{# remove the logarithms to get relative abundances}
+\NormalTok{a.residue <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\KeywordTok{sapply}\NormalTok{(e}\OperatorTok{$}\NormalTok{loga.equil, c)}
+\KeywordTok{colnames}\NormalTok{(a.residue) <-}\StringTok{ }\NormalTok{aa.phyla}\OperatorTok{$}\NormalTok{organism[iloc]}
+\CommentTok{# the BLAST profile}
+\NormalTok{a.blast <-}\StringTok{ }\KeywordTok{alpha.blast}\NormalTok{()}
+\CommentTok{# calculate Gibbs energy of transformation (DGtr) and find optimal logaH2}
+\NormalTok{iblast <-}\StringTok{ }\KeywordTok{match}\NormalTok{(}\KeywordTok{colnames}\NormalTok{(a.residue), }\KeywordTok{colnames}\NormalTok{(a.blast))}
+\NormalTok{r <-}\StringTok{ }\KeywordTok{revisit}\NormalTok{(e, }\StringTok{"DGtr"}\NormalTok{, }\KeywordTok{log10}\NormalTok{(a.blast[i, iblast]), }\DataTypeTok{plot.it=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# return the calculated activities, logaH2 range, DGtr values, and optimal logaH2}
+\KeywordTok{return}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{alpha=}\NormalTok{a.residue, }\DataTypeTok{H2vals=}\NormalTok{a}\OperatorTok{$}\NormalTok{vals[[}\DecValTok{1}\NormalTok{]], }\DataTypeTok{DGtr=}\NormalTok{r}\OperatorTok{$}\NormalTok{H, }\DataTypeTok{logaH2.opt=}\NormalTok{r}\OperatorTok{$}\NormalTok{xopt))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ip.phyla <-}\StringTok{ }\KeywordTok{add.protein}\NormalTok{(aa.phyla)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## add.protein: added 33 new protein(s) to thermo$protein
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{, }\DataTypeTok{ncol=}\DecValTok{3}\NormalTok{), }\DataTypeTok{heights=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{equil.results <-}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) \{}
+\CommentTok{# get the equilibrium degrees of formation and the optimal logaH2}
+\NormalTok{ae <-}\StringTok{ }\KeywordTok{alpha.equil}\NormalTok{(i)}
+\NormalTok{equil.results[[i]] <-}\StringTok{ }\NormalTok{ae}
+\ControlFlowTok{if}\NormalTok{(i }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)) \{}
+\NormalTok{iphy <-}\StringTok{ }\KeywordTok{match}\NormalTok{(}\KeywordTok{colnames}\NormalTok{(ae}\OperatorTok{$}\NormalTok{alpha), phyla.abc)}
+\CommentTok{# top row: equilibrium degrees of formation}
+\KeywordTok{thermo.plot.new}\NormalTok{(}\DataTypeTok{xlim=}\KeywordTok{range}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals), }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{xlab=}\KeywordTok{axis.label}\NormalTok{(}\StringTok{"H2"}\NormalTok{),}
+\DataTypeTok{ylab=}\KeywordTok{expression}\NormalTok{(alpha[equil]), }\DataTypeTok{yline=}\DecValTok{2}\NormalTok{, }\DataTypeTok{cex.axis=}\DecValTok{1}\NormalTok{, }\DataTypeTok{mgp=}\KeywordTok{c}\NormalTok{(}\FloatTok{1.8}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{ncol}\NormalTok{(ae}\OperatorTok{$}\NormalTok{alpha)) \{}
+\KeywordTok{lines}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals, ae}\OperatorTok{$}\NormalTok{alpha[, j], }\DataTypeTok{lty=}\NormalTok{phyla.lty[iphy[j]])}
+\NormalTok{ix <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{length}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals), }\DataTypeTok{length.out=}\DecValTok{11}\NormalTok{)}
+\NormalTok{ix <-}\StringTok{ }\KeywordTok{head}\NormalTok{(}\KeywordTok{tail}\NormalTok{(ix, }\OperatorTok{-}\DecValTok{1}\NormalTok{), }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals[ix], ae}\OperatorTok{$}\NormalTok{alpha[, j][ix], }\DataTypeTok{pch=}\NormalTok{iphy[j]}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\NormalTok{\}}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\KeywordTok{paste}\NormalTok{(}\StringTok{"site"}\NormalTok{, i))}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{, }\DataTypeTok{pch=}\NormalTok{iphy}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{lty=}\NormalTok{phyla.lty[iphy], }\DataTypeTok{legend=}\NormalTok{phyla.abbrv[iphy], }\DataTypeTok{bg=}\StringTok{"white"}\NormalTok{)}
+\CommentTok{# bottom row: Gibbs energy of transformation and position of minimum}
+\KeywordTok{thermo.plot.new}\NormalTok{(}\DataTypeTok{xlim=}\KeywordTok{range}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals), }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\OperatorTok{/}\KeywordTok{log}\NormalTok{(}\DecValTok{10}\NormalTok{)), }\DataTypeTok{xlab=}\KeywordTok{axis.label}\NormalTok{(}\StringTok{"H2"}\NormalTok{),}
+\DataTypeTok{ylab=}\KeywordTok{expr.property}\NormalTok{(}\StringTok{"DGtr/2.303RT"}\NormalTok{), }\DataTypeTok{yline=}\DecValTok{2}\NormalTok{, }\DataTypeTok{cex.axis=}\DecValTok{1}\NormalTok{, }\DataTypeTok{mgp=}\KeywordTok{c}\NormalTok{(}\FloatTok{1.8}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{lines}\NormalTok{(ae}\OperatorTok{$}\NormalTok{H2vals, ae}\OperatorTok{$}\NormalTok{DGtr)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{ae}\OperatorTok{$}\NormalTok{logaH2.opt, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\KeywordTok{get.logaH2}\NormalTok{(bison.T[i]), }\DataTypeTok{lty=}\DecValTok{3}\NormalTok{, }\DataTypeTok{lwd=}\FloatTok{1.5}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(i}\OperatorTok{==}\DecValTok{1}\NormalTok{) }\KeywordTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\DataTypeTok{lty=}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{), }\DataTypeTok{lwd=}\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{bg=}\StringTok{"white"}\NormalTok{,}
+\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Equation 2"}\NormalTok{, }\StringTok{"optimal"}\NormalTok{))}
+
+\NormalTok{\}}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## energy.args: temperature is 93.3 C
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is log_a(H2) at 101 values from -11 to -1
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 366.45 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 366.45 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 245.95 195.69 211.71 177.2 167.09
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'as.residue' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## revisit: calculating DGtr in 1 dimensions
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: temperature is 79.4 C
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is log_a(H2) at 101 values from -11 to -1
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 352.55 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 352.55 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 227.81 207.97 197.37 199.88 210.45 181.82 170.96
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'as.residue' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## revisit: calculating DGtr in 1 dimensions
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: temperature is 67.5 C
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is log_a(H2) at 101 values from -11 to -1
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 340.65 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 340.65 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 194.35 220.39 216.78 236.97 229.93 206.83 201.52
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'as.residue' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## revisit: calculating DGtr in 1 dimensions
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: temperature is 65.3 C
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is log_a(H2) at 101 values from -11 to -1
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 338.45 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 338.45 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 271.12 210.79 213.12 212.4 209.98 204.53 197.72
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'as.residue' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## revisit: calculating DGtr in 1 dimensions
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: temperature is 57.1 C
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: pressure is Psat
+\end{verbatim}
+
+\begin{verbatim}
+## energy.args: variable 1 is log_a(H2) at 101 values from -11 to -1
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 27 species at 330.25 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 18 species at 330.25 K and 1 bar (wet)
+\end{verbatim}
+
+\begin{verbatim}
+## balance: from protein length
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: n.balance is 213.59 212.57 216.98 201.97 220.72 199.31 176.6
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: loga.balance is 0
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using 'as.residue' for molar formulas
+\end{verbatim}
+
+\begin{verbatim}
+## equilibrate: using boltzmann method
+\end{verbatim}
+
+\begin{verbatim}
+## revisit: calculating DGtr in 1 dimensions
+\end{verbatim}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\subsection{7 Activity of hydrogen
+comparison}\label{activity-of-hydrogen-comparison}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E.AgAgCl <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(T) \{}
+\FloatTok{0.23737} \OperatorTok{-}\StringTok{ }\FloatTok{5.3783e-4} \OperatorTok{*}\StringTok{ }\NormalTok{T }\OperatorTok{-}\StringTok{ }\FloatTok{2.3728e-6} \OperatorTok{*}\StringTok{ }\NormalTok{T}\OperatorTok{^}\DecValTok{2} \OperatorTok{-}\StringTok{ }\FloatTok{2.2671e-9} \OperatorTok{*}\StringTok{ }\NormalTok{(T}\OperatorTok{+}\DecValTok{273}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{T.ORP <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{93.9}\NormalTok{, }\FloatTok{87.7}\NormalTok{, }\FloatTok{75.7}\NormalTok{, }\FloatTok{70.1}\NormalTok{, }\FloatTok{66.4}\NormalTok{, }\FloatTok{66.2}\NormalTok{)}
+\NormalTok{pH.ORP <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{8.28}\NormalTok{, }\FloatTok{8.31}\NormalTok{, }\FloatTok{7.82}\NormalTok{, }\FloatTok{7.96}\NormalTok{, }\FloatTok{8.76}\NormalTok{, }\FloatTok{8.06}\NormalTok{)}
+\NormalTok{ORP <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{258}\NormalTok{, }\OperatorTok{-}\DecValTok{227}\NormalTok{, }\OperatorTok{-}\DecValTok{55}\NormalTok{, }\OperatorTok{-}\DecValTok{58}\NormalTok{, }\OperatorTok{-}\DecValTok{98}\NormalTok{, }\OperatorTok{-}\DecValTok{41}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Eh <-}\StringTok{ }\NormalTok{ORP}\OperatorTok{/}\DecValTok{1000} \OperatorTok{+}\StringTok{ }\KeywordTok{E.AgAgCl}\NormalTok{(T.ORP)}
+\NormalTok{pe <-}\StringTok{ }\KeywordTok{convert}\NormalTok{(Eh, }\StringTok{"pe"}\NormalTok{, }\DataTypeTok{T=}\KeywordTok{convert}\NormalTok{(T.ORP, }\StringTok{"K"}\NormalTok{))}
+\NormalTok{logK.ORP <-}\StringTok{ }\KeywordTok{subcrt}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"e-"}\NormalTok{, }\StringTok{"H+"}\NormalTok{, }\StringTok{"H2"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{T=}\NormalTok{T.ORP)}\OperatorTok{$}\NormalTok{out}\OperatorTok{$}\NormalTok{logK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## info.character: found H2(aq), also available in gas
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 6 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logaH2.ORP <-}\StringTok{ }\NormalTok{logK.ORP }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{pe }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{pH.ORP}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{loga.HS <-}\StringTok{ }\KeywordTok{log10}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{4.77e-6}\NormalTok{, }\FloatTok{2.03e-6}\NormalTok{, }\FloatTok{3.12e-7}\NormalTok{, }\FloatTok{4.68e-7}\NormalTok{, }\FloatTok{2.18e-7}\NormalTok{))}
+\NormalTok{loga.SO4 <-}\StringTok{ }\KeywordTok{log10}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{2.10e-4}\NormalTok{, }\FloatTok{2.03e-4}\NormalTok{, }\FloatTok{1.98e-4}\NormalTok{, }\FloatTok{2.01e-4}\NormalTok{, }\FloatTok{1.89e-4}\NormalTok{))}
+\NormalTok{logK.S <-}\StringTok{ }\KeywordTok{subcrt}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"HS-"}\NormalTok{, }\StringTok{"H2O"}\NormalTok{, }\StringTok{"SO4-2"}\NormalTok{, }\StringTok{"H+"}\NormalTok{, }\StringTok{"H2"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DataTypeTok{T=}\NormalTok{bison.T)}\OperatorTok{$}\NormalTok{out}\OperatorTok{$}\NormalTok{logK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## info.character: found H2O(liq), also available in cr, aq
+\end{verbatim}
+
+\begin{verbatim}
+## info.character: found H2(aq), also available in gas
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 5 species at 5 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logaH2.S <-}\StringTok{ }\NormalTok{(logK.S }\OperatorTok{+}\StringTok{ }\NormalTok{bison.pH }\OperatorTok{-}\StringTok{ }\NormalTok{loga.SO4 }\OperatorTok{+}\StringTok{ }\NormalTok{loga.HS) }\OperatorTok{/}\StringTok{ }\DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DO <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.173}\NormalTok{, }\FloatTok{0.776}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\FloatTok{2.8}\NormalTok{)}
+\NormalTok{logaO2 <-}\StringTok{ }\KeywordTok{log10}\NormalTok{(DO}\OperatorTok{/}\DecValTok{1000}\OperatorTok{/}\DecValTok{32}\NormalTok{)}
+\NormalTok{logK <-}\StringTok{ }\KeywordTok{subcrt}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"O2"}\NormalTok{, }\StringTok{"H2"}\NormalTok{, }\StringTok{"H2O"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{0.5}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{T=}\NormalTok{bison.T)}\OperatorTok{$}\NormalTok{out}\OperatorTok{$}\NormalTok{logK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## info.character: found O2(aq), also available in gas
+\end{verbatim}
+
+\begin{verbatim}
+## info.character: found H2(aq), also available in gas
+\end{verbatim}
+
+\begin{verbatim}
+## info.character: found H2O(liq), also available in cr, aq
+\end{verbatim}
+
+\begin{verbatim}
+## subcrt: 3 species at 5 values of T and P (wet)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logaH2.O <-}\StringTok{ }\DecValTok{0} \OperatorTok{-}\StringTok{ }\FloatTok{0.5}\OperatorTok{*}\NormalTok{logaO2 }\OperatorTok{-}\StringTok{ }\NormalTok{logK}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 2011 plot}
+\NormalTok{xlab <-}\StringTok{ }\KeywordTok{axis.label}\NormalTok{(}\StringTok{"T"}\NormalTok{)}
+\NormalTok{ylab <-}\StringTok{ }\KeywordTok{axis.label}\NormalTok{(}\StringTok{"H2"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(Tlim, }\KeywordTok{get.logaH2}\NormalTok{(Tlim), }\DataTypeTok{xlim=}\NormalTok{Tlim, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{45}\NormalTok{,}\DecValTok{0}\NormalTok{),}
+\DataTypeTok{xlab=}\NormalTok{xlab, }\DataTypeTok{ylab=}\NormalTok{ylab, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(T.ORP, logaH2.ORP, }\DataTypeTok{pch=}\DecValTok{15}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(T.ORP, logaH2.ORP, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(bison.T, logaH2.O, }\DataTypeTok{pch=}\DecValTok{16}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(bison.T, logaH2.O, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(bison.T, logaH2.S, }\DataTypeTok{pch=}\DecValTok{17}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(bison.T, logaH2.S, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\NormalTok{llab <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Equation 2"}\NormalTok{, }\StringTok{"ORP"}\NormalTok{, }\StringTok{"dissolved oxygen"}\NormalTok{, }\StringTok{"sulfate/sulfide"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{65}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{74}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{4}\NormalTok{, }\OperatorTok{-}\DecValTok{25}\NormalTok{, }\OperatorTok{-}\DecValTok{40}\NormalTok{, }\OperatorTok{-}\DecValTok{11}\NormalTok{), llab)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 2013 plot}
+\KeywordTok{plot}\NormalTok{(Tlim, }\KeywordTok{get.logaH2}\NormalTok{(Tlim), }\DataTypeTok{xlim=}\NormalTok{Tlim, }\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{11}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{),}
+\DataTypeTok{xlab=}\NormalTok{xlab, }\DataTypeTok{ylab=}\NormalTok{ylab, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{, }\DataTypeTok{lty=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(bison.T, }\KeywordTok{sapply}\NormalTok{(equil.results, }\StringTok{"["}\NormalTok{, }\StringTok{"logaH2.opt"}\NormalTok{), }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(bison.T, }\KeywordTok{sapply}\NormalTok{(equil.results, }\StringTok{"["}\NormalTok{, }\StringTok{"logaH2.opt"}\NormalTok{), }\DataTypeTok{pch=}\DecValTok{21}\NormalTok{, }\DataTypeTok{bg=}\StringTok{"white"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{90}\NormalTok{, }\OperatorTok{-}\FloatTok{5.3}\NormalTok{, }\StringTok{"Equation 2"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\DecValTok{66}\NormalTok{, }\OperatorTok{-}\DecValTok{9}\NormalTok{, }\StringTok{"optimal parameterization}\CharTok{\textbackslash{}n}\StringTok{for observed}\CharTok{\textbackslash{}n}\StringTok{phylum abundances"}\NormalTok{, }\DataTypeTok{adj=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-27-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{layout}\NormalTok{(}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{2}\NormalTok{, }\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{), }\DataTypeTok{widths=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\FloatTok{2.5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{plot.new}\NormalTok{()}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\DataTypeTok{pch=}\DecValTok{0}\OperatorTok{:}\DecValTok{11}\NormalTok{, }\DataTypeTok{legend=}\NormalTok{phyla.abbrv, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.5}\NormalTok{)}
+\NormalTok{lim <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{6}\NormalTok{, }\OperatorTok{-}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{equil.opt <-}\StringTok{ }\NormalTok{a.blast <-}\StringTok{ }\KeywordTok{alpha.blast}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(iloc }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) \{}
+\NormalTok{a.equil <-}\StringTok{ }\NormalTok{equil.results[[iloc]]}
+\NormalTok{iopt <-}\StringTok{ }\KeywordTok{match}\NormalTok{(a.equil}\OperatorTok{$}\NormalTok{logaH2.opt, a.equil}\OperatorTok{$}\NormalTok{H2vals)}
+\NormalTok{ae.opt <-}\StringTok{ }\NormalTok{a.equil}\OperatorTok{$}\NormalTok{alpha[iopt, ]}
+\CommentTok{# which are these phyla in the alphabetical list of phyla}
+\NormalTok{iphy <-}\StringTok{ }\KeywordTok{match}\NormalTok{(}\KeywordTok{names}\NormalTok{(ae.opt), phyla.abc)}
+\NormalTok{equil.opt[iloc, iphy] <-}\StringTok{ }\NormalTok{ae.opt}
+\NormalTok{mar <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{2.5}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{2.5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\KeywordTok{thermo.plot.new}\NormalTok{(}\DataTypeTok{xlab=}\KeywordTok{expression}\NormalTok{(log[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{alpha[obs]), }\DataTypeTok{ylab=}\KeywordTok{expression}\NormalTok{(log[}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\NormalTok{alpha[equil]),}
+\DataTypeTok{xlim=}\NormalTok{lim, }\DataTypeTok{ylim=}\NormalTok{lim, }\DataTypeTok{mar=}\NormalTok{mar, }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{, }\DataTypeTok{yline=}\FloatTok{1.5}\NormalTok{)}
+\CommentTok{# add points and 1:1 line}
+\KeywordTok{points}\NormalTok{(}\KeywordTok{log2}\NormalTok{(a.blast[iloc, iphy]), }\KeywordTok{log2}\NormalTok{(ae.opt), }\DataTypeTok{pch=}\NormalTok{iphy}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(lim, lim, }\DataTypeTok{lty=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\KeywordTok{paste}\NormalTok{(}\StringTok{"site"}\NormalTok{, iloc))}
+\CommentTok{# within-plot legend: DGtr}
+\NormalTok{DGexpr <-}\StringTok{ }\KeywordTok{as.expression}\NormalTok{(}\KeywordTok{quote}\NormalTok{(Delta}\OperatorTok{*}\KeywordTok{italic}\NormalTok{(G[tr])}\OperatorTok{/}\KeywordTok{italic}\NormalTok{(RT) }\OperatorTok{==}\StringTok{ }\KeywordTok{phantom}\NormalTok{()))}
+\NormalTok{DGval <-}\StringTok{ }\KeywordTok{format}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\FloatTok{2.303}\OperatorTok{*}\NormalTok{a.equil}\OperatorTok{$}\NormalTok{DGtr[iopt], }\DecValTok{3}\NormalTok{), }\DataTypeTok{nsmall=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(DGexpr, DGval))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{mgp=}\KeywordTok{c}\NormalTok{(}\FloatTok{1.8}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{), }\DataTypeTok{cex=}\DecValTok{1}\NormalTok{)}
+\CommentTok{# make the blast plot}
+\NormalTok{ab <-}\StringTok{ }\KeywordTok{alpha.blast}\NormalTok{()}
+\KeywordTok{rownames}\NormalTok{(ab) <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{t}\NormalTok{(ab), }\DataTypeTok{col=}\NormalTok{phyla.cols, }\DataTypeTok{ylab=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"site"}\NormalTok{, }\DataTypeTok{axes=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{cex.axis=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{cex.names=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{las=}\DecValTok{1}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\KeywordTok{expression}\NormalTok{(alpha[obs]), }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.1}\OperatorTok{*}\KeywordTok{par}\NormalTok{(}\StringTok{"cex"}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\StringTok{"BLAST profile"}\NormalTok{, }\DataTypeTok{cex.main=}\FloatTok{0.8}\NormalTok{)}
+\CommentTok{# make the equilibrium plot}
+\KeywordTok{rownames}\NormalTok{(equil.opt) <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{t}\NormalTok{(equil.opt), }\DataTypeTok{col=}\NormalTok{phyla.cols, }\DataTypeTok{ylab=}\OtherTok{NULL}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"site"}\NormalTok{, }\DataTypeTok{axes=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{cex.axis=}\FloatTok{0.8}\NormalTok{,}
+\DataTypeTok{cex.names=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{las=}\DecValTok{1}\NormalTok{)}
+\KeywordTok{mtext}\NormalTok{(}\KeywordTok{expression}\NormalTok{(alpha[equil]), }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{1.1}\OperatorTok{*}\KeywordTok{par}\NormalTok{(}\StringTok{"cex"}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main=}\StringTok{"metastable}\CharTok{\textbackslash{}n}\StringTok{equilibrium"}\NormalTok{, }\DataTypeTok{cex.main=}\FloatTok{0.8}\NormalTok{)}
+\CommentTok{# add legend}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\KeywordTok{plot.new}\NormalTok{()}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"bottomleft"}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{rev}\NormalTok{(phyla.abbrv), }\DataTypeTok{fill=}\KeywordTok{rev}\NormalTok{(phyla.cols), }\DataTypeTok{bty=}\StringTok{"n"}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{wjd_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+
+\end{document}
