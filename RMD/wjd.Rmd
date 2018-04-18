@@ -1,29 +1,31 @@
 ---
 title: "Winding journey down (in Gibbs energy)"
-author: "Jeffrey M. Dick"
-date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: yes
-  tufte::tufte_book:
-    citation_package: natbib
-    latex_engine: xelatex
-  tufte::tufte_handout:
-    citation_package: natbib
-    latex_engine: xelatex
-  tufte::tufte_html:
-    css: vig.css
+  html_document:
     mathjax: null
-    toc: yes
-    tufte_features: background
-link-citations: yes
-csl: elementa.csl
+    theme: default
+    css: obigt.css
+vignette: >
+  %\VignetteIndexEntry{Winding journey down (in Gibbs energy)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 bibliography: vig.bib
-vignette: |
-  %\VignetteIndexEntry{Winding journey down (in Gibbs energy)} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+# so that these appear in the bibliography
+nocite: | 
+  @SPRONS92, @SLOP98, @SLOP07, @SLOP15, @CHNOSZ, @JOH92, @WP02, @CWM89, @PRPG97, @TH88, @Kul06, @Sho09, @HP11
+csl: elementa.csl
 ---
 
-
+```{r setup, include=FALSE, cache=FALSE}
+library(knitr)
+## set global chunk options
+opts_chunk$set(fig.align='center')
+opts_chunk$set(tidy=TRUE)
+## set code/output width
+options(width=85)
+## set number of digits
+options(digits=3)
+```
 
 ```{r}
 library(CHNOSZ)
